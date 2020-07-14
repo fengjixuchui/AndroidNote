@@ -4,17 +4,41 @@
 
 HLS协议规定:  
 
-- 视频的封装格式是TS
-- 视频的编码格式为H264，音频编码格式为MP3、AAC或者AC-3
+- 视频的封装格式是ts(WWDC2016年发布也支持了fMP4)
+- 视频的编码格式为H264、H265、VP9(17年支持H265、VP9)，音频编码格式为MP3、AAC或者AC-3
 - 除了TS视频文件本身，还定义了用来控制播放的m3u8文件(文本文件)
 
 HLS协议由三部分组成:  
 
 - HTTP:传输协议
-- m3u8:索引文件
+- m3u8:索引文件(m3u8 文件本质说其实是采用了编码是 UTF-8 的 m3u 文件。)
 - TS:音视频媒体信息
 
 HLS点播，基本上就是常见的分段HTTP点播，不同在于，它的分段非常小。相对于常见的流媒体直播协议，例如RTMP协议、RTSP协议、MMS协议等，HLS直播最大的不同在于，直播客户端获取到的，并不是一个完整的数据流。HLS协议在服务器端将直播数据流存储为连续的、很短时长的媒体文件（MPEG-TS格式），而客户端则不断的下载并播放这些小文件。因为服务器端总是会将最新的直播数据生成新的小文件，这样客户端只要不停的按顺序播放从服务器获取到的文件，就实现了直播。由此可见，基本上可以认为，HLS是以点播的技术方式来实现直播。由于数据通过HTTP协议传输，所以完全不用考虑防火墙或者代理的问题，而且分段文件的时长很短，客户端可以很快的选择和切换码率，以适应不同带宽条件下的播放。不过HLS的这种技术特点，决定了它的延迟一般总是会高于普通的流媒体直播协议。它也解决了RTMP协议存在的一些问题，例如RTMP协议不使用标准的HTTP接口传输数据(TCP、UDP端口)，所以在一些特殊的网络环境下可能被防火墙屏蔽掉，而HLS使用的是HTTP协议传输数据(80端口)，不会遇到被防火墙屏蔽的情况。
+
+
+
+## 使用
+
+- [Google](https://en.wikipedia.org/wiki/Google) added HTTP Live Streaming support in [Android](https://en.wikipedia.org/wiki/Android_(operating_system)) 3.0 (Honeycomb).[[17\]](https://en.wikipedia.org/wiki/HTTP_Live_Streaming#cite_note-17)
+- [HP](https://en.wikipedia.org/wiki/Hewlett-Packard) added HTTP Live Streaming support in [webOS](https://en.wikipedia.org/wiki/Webos) 3.0.5.[[18\]](https://en.wikipedia.org/wiki/HTTP_Live_Streaming#cite_note-18)
+- Microsoft added support for HTTP Live Streaming in EdgeHTML rendering engine in Windows 10 in 2015.[[19\]](https://en.wikipedia.org/wiki/HTTP_Live_Streaming#cite_note-19)
+- Microsoft added support for HTTP Live Streaming in IIS Media Services 4.0.[[20\]](https://en.wikipedia.org/wiki/HTTP_Live_Streaming#cite_note-IISMS4-20)
+- [Yospace](https://en.wikipedia.org/wiki/Yospace) added HTTP Live Streaming support in Yospace HLS Player and SDK for flash version 1.0.[*[citation needed](https://en.wikipedia.org/wiki/Wikipedia:Citation_needed)*]
+- [Sling Media](https://en.wikipedia.org/wiki/Sling_Media) added HTTP Live Streaming support to its [Slingboxes](https://en.wikipedia.org/wiki/Slingbox) and its SlingPlayer apps.[[21\]](https://en.wikipedia.org/wiki/HTTP_Live_Streaming#cite_note-21)
+- In 2014/15, the [BBC](https://en.wikipedia.org/wiki/BBC) introduced HLS-AAC streams for its live internet radio and on-demand audio services, and supports those streams with its [iPlayer Radio](https://en.wikipedia.org/wiki/IPlayer_Radio) clients.[[22\]](https://en.wikipedia.org/wiki/HTTP_Live_Streaming#cite_note-22)
+
+
+
+### HLS架构
+
+HLS的架构分为三部分：Server，CDN，Client 。即服务器、分发组件和客户端。
+
+下面是 HLS 整体架构图：
+
+<img src="https://raw.githubusercontent.com/CharonChui/Pictures/master/transport_stream_2x.png" style="zoom:50%;" />
+
+
 
 ## TS
 
@@ -27,7 +51,7 @@ TS(Transport Stream)，全程为MPEG2-TS。它的特点就是要求从视频流�
 - 是一个索引地址/播放列表，通过FFmpeg将本地的xxx.mp4进行切片处理，生成m3u8播放列表（索引文件）和N多个  .ts文件，并将其（m3u8、N个ts）放置在本地搭建好的webServer服务器的指定目录下，我就可以得到一个可以实时播放的网址，我们把这个m3u8地址复制到 VLC 上就可以实时观看！ 在 HLS 流下，本地视频被分割成一个一个的小切片，一般10秒一个，这些个小切片被 m3u8管理，并且随着终端的FFmpeg  向本地拉流的命令而实时更新，影片进度随着拉流的进度而更新，播放过的片段不在本地保存，自动删除，直到该文件播放完毕或停止，ts  切片会相应的被删除，流停止，影片不会立即停止，影片播放会滞后于拉流一段时间
 
 
-<img src="https://raw.githubusercontent.com/CharonChui/Pictures/master/transport_stream_2x.png" style="zoom:50%;" />
+
 
 - Media encoder(媒体编码)
 
@@ -41,7 +65,7 @@ TS(Transport Stream)，全程为MPEG2-TS。它的特点就是要求从视频流�
 
 ### 多码率适配流(Master Playlist)
 
-<img src="https://raw.githubusercontent.com/CharonChui/Pictures/master/indexing_2x.png" style="zoom:70%;" />
+<img src="https://raw.githubusercontent.com/CharonChui/Pictures/master/adaptive_bitratestreaming_HLS.jpg" style="zoom:70%;" />
 
 客户端播放HLS视频流的逻辑其实非常简单，先下载一级Index file，它里面记录了二级索引文件（Alternate-A、Alternate-B、Alternate-C）的地址，然后客户端再去下载二级索引文件，二级索引文件中又记录了TS文件的下载地址，这样客户端就可以按顺序下载TS视频文件并连续播放。
 
@@ -127,6 +151,36 @@ cctv1hd-1585920074000.ts
 
 
 
+#### 直播流 
+
+```xml
+#EXTM3U
+#EXT-X-VERSION:3
+#EXT-X-MEDIA-SEQUENCE:396078
+#EXT-X-TARGETDURATION:10
+#EXTINF:10.000,
+cctv1hd-1591683975000.ts
+#EXTINF:10.000,
+cctv1hd-1591683985000.ts
+#EXTINF:10.000,
+cctv1hd-1591683995000.ts
+#EXTINF:10.000,
+cctv1hd-1591684005000.ts
+#EXTINF:10.000,
+cctv1hd-1591684015000.ts
+#EXTINF:10.000,
+cctv1hd-1591684025000.ts
+```
+
+直播流是没有#EXT-X-ENDLIST标签的，也就是说播放器在播放完一个.ts文件后会向服务器再次发送请求m3u8文件的请求。
+
+live m3u8文件列表需要不断更新，更新规则：
+
+1. 移除一个文件播放列表中靠前的（认为已播放的）文件
+2. 不断更新`EXT-X-MEDIA-SEQUENCE`标签，以**步长为1**进行递增
+
+
+
 
 
 ## HLS 的优势
@@ -138,14 +192,27 @@ cctv1hd-1585920074000.ts
 
 ## HLS 的劣势
 
-- 相比 RTMP 这类长连接协议, 延时较高, 难以用到互动直播场景.HLS 理论延时 = 1 个切片的时长 + 0-1个 td (td 是 EXT-X-TARGETDURATION, 可简单理解为播放器取片的间隔时间) + 0-n 个启动切片(苹果官方建议是请求到 3 个片之后才开始播放) + 播放器最开始请求的片的网络延时(网络连接耗时)。为了追求低延时效果, 可以将切片切的更小, 取片间隔做的更小, 播放器未取到 3 个片就启动播放. 但是, 这些优化方式都会增加 HLS 不稳定和出现错误的风险.
+- 相比 RTMP 这类长连接协议, 延时较高, 难以用到互动直播场景.HLS 理论延时 = 1 个切片的时长 + 0-1个 td (td 是 EXT-X-TARGETDURATION, 可简单理解为播放器取片的间隔时间) + 0-n 个启动切片(苹果官方建议是请求到 3 个片之后才开始播放) + 播放器最开始请求的片的网络延时(网络连接耗时)。为了追求低延时效果, 可以将切片切的更小, 取片间隔做的更小, 播放器未取到 3 个片就启动播放. 但是, 这些优化方式都会增加 HLS 不稳定和出现错误的风险.通常 HLS 直播延时会达到 20-30s，而高延时对于需要实时互动体验的直播来说是不可接受的。Apple在WWDC2019发布了新的解决方案，可以将延迟从8秒降低到1至2秒。
 - 对于点播服务来说, 由于 TS 切片通常较小, 海量碎片在文件分发, 一致性缓存, 存储等方面都有较大挑战.
+- HLS 基于短连接 HTTP，HTTP 是基于 TCP 的，这就意味着 HLS 需要不断地与服务器建立连接，TCP 每次建立连接时的三次握手、慢启动过程、断开连接时的四次挥手都会产生消耗。
 
 
 
 
 
+#### 测试地址:
 
+- CCTV1高清：http://ivi.bupt.edu.cn/hls/cctv1hd.m3u8
+- CCTV3高清：http://ivi.bupt.edu.cn/hls/cctv3hd.m3u8
+- CCTV5高清：http://ivi.bupt.edu.cn/hls/cctv5hd.m3u8
+- CCTV5+高清：http://ivi.bupt.edu.cn/hls/cctv5phd.m3u8
+- CCTV6高清：http://ivi.bupt.edu.cn/hls/cctv6hd.m3u8
+
+
+
+#### 参考:
+
+- [HTTP Live Streaming Overview](https://developer.apple.com/library/archive/documentation/NetworkingInternet/Conceptual/StreamingMediaGuide/Introduction/Introduction.html#//apple_ref/doc/uid/TP40008332-CH1-SW1)
 
 
 
