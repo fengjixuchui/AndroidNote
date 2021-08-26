@@ -13,7 +13,6 @@ Android学习笔记
 
 - [史上最适合Android开发者学习的Go语言教程](https://github.com/CharonChui/GolangStudyNote)
 - [史上最适合Android开发者学习的iOS开发教程](https://github.com/CharonChui/iOSStudyNote)
-
 - [源码解析][43] 
     - [自定义View详解][1]
     - [Activity界面绘制过程详解][2]
@@ -25,6 +24,7 @@ Android学习笔记
     - [ListView源码分析][8]
     - [VideoView源码分析][9]
     - [View绘制过程详解][10]
+    - [LeakCanary源码分析][284]
     - [网络部分][11]
         - [HttpURLConnection详解][12]
         - [HttpURLConnection与HttpClient][13]
@@ -32,7 +32,6 @@ Android学习笔记
         - [Volley源码分析][15]
         - [Retrofit详解(上)][16]
         - [Retrofit详解(下)][17]
-
 - [Dagger2][199]        
     - [1.Dagger2简介(一).md][200]
     - [2.Dagger2入门demo(二).md][201]    
@@ -43,7 +42,6 @@ Android学习笔记
     - [7.Dagger2之dagger-android(七).md][206]            
     - [8.Dagger2与MVP(八).md][207]    
     - [9.Dagger2原理分析(九).md][212]
-
 - [音视频开发][44]
     - [搭建nginx+rtmp服务器][18]
     - [视频播放相关内容总结][19]
@@ -98,10 +96,66 @@ Android学习笔记
         - [11.OpenGL ES滤镜][242]
     - [弹幕][243]
         - [Android弹幕实现][244]
+- [操作系统][263]
+    - [1.操作系统简介][264]
+    - [2.进程与线程][265]
+    - [3.内存管理][266]
+    - [4.调度][267]
+    - [5.I/O][268]
+    - [6.文件管理][269]
+    - [7.嵌入式系统][270]
+    - [8.虚拟机][271]
+        - [Android内核][274]
+            - [1.Android进程间通信][275]
+            - [2.Android线程间通信之Handler消息机制][276]
+            - [3.Android Framework框架][277]
+            - [4.ActivityManagerService简介][278]
+            - [5.Android消息获取][279]
+            - [6.屏幕绘制基础][280]
+            - [7.View绘制原理][281]
+            - [8.WindowManagerService简介][282]
+            - [9.PackageManagerService简介][283]
+- [架构设计][272]
+    - [1.架构简介][273]
+
+- [Jetpack][287]
+    - [Jetpack简介][288]
+    - [architecture][289]
+        - [1.简介][293]
+        - [2.ViewBinding简介][294]
+        - [3.Lifecycle简介][295]
+        - [4.ViewModel简介][296]
+        - [5.LiveData简介][297]
+        - [6.DataBinding简介][298]
+        - [7.Room简介][299]
+        - [8.PagingLibrary简介][300]
+        - [9.App Startup简介][301]
+        - [10.DataStore简介][302]
+        - [11.Hilt简介][303]
+        - [12.Navigation简介][304]
+        - [13.Jetpack MVVM简介][305]
+        - [14.findViewById的过去及未来][306]
+    - [ui][290]
+        - [Jetpack Compose简介][307]
+        - [material][308]
+            - [1.MaterialToolbar简介][309]
+            - [2.NavigationView简介][310]
+            - [3.NestedScrollView简介][311]
+            - [4.CoordinatorLayout简介][312]
+            - [5.AppBarLayout简介][313]
+            - [6.CollapsingToolbarLayout简介][314]
+            - [7.Snackbar简介][315]
+            - [8.TabLayout简介][316]
+    - [foundation][291]
+        - [1.简介][317]
+    - [behavior][292]
+        - [1.简介][318]
+
 -  [图片加载][45]
     - [Glide简介(上)][25]
     - [Glide简介(下)][26]
     - [图片加载库比较][27]
+    - [Coil简介][320]
 
 
 - [RxJava][46]
@@ -124,22 +178,23 @@ Android学习笔记
     - [Icon制作][223]
 
 - [Kotlin学习][48]
-    - [Kotlin学习教程(一)][180]
-    - [Kotlin学习教程(二)][181]
-    - [Kotlin学习教程(三)][182]
-    - [Kotlin学习教程(四)][183]
-    - [Kotlin学习教程(五)][184]
-    - [Kotlin学习教程(六)][185]
-    - [Kotlin学习教程(七)][186]
-    - [Kotlin学习教程(八)][187]
-    - [Kotlin学习教程(九)][188]
-    - [Kotlin学习教程(十)][197]
+    - [1.Kotlin_简介&变量&类&接口][180]
+    - [2.Kotlin_高阶函数&Lambda&内联函数][181]
+    - [3.Kotlin_数字&字符串&数组&集合][182]
+    - [4.Kotlin_表达式&关键字][183]
+    - [5.Kotlin_内部类&密封类&枚举&委托][184]
+    - [6.Kotlin_多继承问题][185]
+    - [7.Kotlin_注解&反射&扩展][186]
+    - [8.Kotlin_协程][187]
+    - [9.Kotlin_androidktx][188]
+    - [10.Kotlin_设计模式][197]
 
 
 
 - [Gradle&Maven][49]
     - [Gradle专题][39]
     - [发布library到Maven仓库][40]
+    - [Composing builds简介][319]
 
 - [应用发布][50]
     - [使用Jenkins实现自动化打包][198]
@@ -172,12 +227,11 @@ Android学习笔记
     - [Android启动模式详解][75]
     - [Android卸载反馈][76]
     - [ApplicationId vs PackageName][77]
-    - [ART与Dalvik][78]
+    - [AndroidRuntime_ART与Dalvik][78]
     - [BroadcastReceiver安全问题][79]
-    - [Handler导致内存泄露分析][80]
+    - [Crash及ANR分析][80]
     - [Library项目中资源id使用case时报错][81]
     - [Mac下配置adb及Android命令][82]
-    - [MaterialDesign使用][83]
     - [RecyclerView专题][84]
     - [ConstraintLaayout简介][194]
     - [Android WorkManager][208]
@@ -216,6 +270,8 @@ Android学习笔记
     - [volatile和Synchronized区别][109]
     - [Http与Https的区别][195]
     - [Top-K问题][196]
+    - [Java内存模型][285]
+    - [JVM架构][286]
 - [基础部分][54] 
     - [安全退出应用程序][110]
     - [病毒][111]
@@ -367,12 +423,12 @@ Android学习笔记
 [75]: https://github.com/CharonChui/AndroidNote/blob/master/AdavancedPart/Android%E5%90%AF%E5%8A%A8%E6%A8%A1%E5%BC%8F%E8%AF%A6%E8%A7%A3.md   "Android启动模式详解"
 [76]: https://github.com/CharonChui/AndroidNote/blob/master/AdavancedPart/Android%E5%8D%B8%E8%BD%BD%E5%8F%8D%E9%A6%88.md   "Android卸载反馈"
 [77]: https://github.com/CharonChui/AndroidNote/blob/master/AdavancedPart/ApplicationId%20vs%20PackageName.md   "ApplicationId vs PackageName"
-[78]: https://github.com/CharonChui/AndroidNote/blob/master/AdavancedPart/ART%E4%B8%8EDalvik.md   "ART与Dalvik"
+[78]: https://github.com/CharonChui/AndroidNote/blob/master/AdavancedPart/AndroidRuntime_ART%E4%B8%8EDalvik.md   "AndroidRuntime_ART与Dalvik"
 [79]: https://github.com/CharonChui/AndroidNote/blob/master/AdavancedPart/BroadcastReceiver%E5%AE%89%E5%85%A8%E9%97%AE%E9%A2%98.md   "BroadcastReceiver安全问题"
-[80]: https://github.com/CharonChui/AndroidNote/blob/master/AdavancedPart/Handler%E5%AF%BC%E8%87%B4%E5%86%85%E5%AD%98%E6%B3%84%E9%9C%B2%E5%88%86%E6%9E%90.md   "Handler导致内存泄露分析"
+[80]: https://github.com/CharonChui/AndroidNote/blob/master/AdavancedPart/Crash%E5%8F%8AANR%E5%88%86%E6%9E%90.md  "Crash及ANR分析"
+
 [81]: https://github.com/CharonChui/AndroidNote/blob/master/AdavancedPart/Library%E9%A1%B9%E7%9B%AE%E4%B8%AD%E8%B5%84%E6%BA%90id%E4%BD%BF%E7%94%A8case%E6%97%B6%E6%8A%A5%E9%94%99.md   "Library项目中资源id使用case时报错"
 [82]: https://github.com/CharonChui/AndroidNote/blob/master/AdavancedPart/Mac%E4%B8%8B%E9%85%8D%E7%BD%AEadb%E5%8F%8AAndroid%E5%91%BD%E4%BB%A4.md   "Mac下配置adb及Android命令"
-[83]: https://github.com/CharonChui/AndroidNote/blob/master/AdavancedPart/MaterialDesign%E4%BD%BF%E7%94%A8.md   "MaterialDesign使用"
 [84]: https://github.com/CharonChui/AndroidNote/blob/master/AdavancedPart/RecyclerView%E4%B8%93%E9%A2%98.md   "RecyclerView专题"
 [85]: https://github.com/CharonChui/AndroidNote/blob/master/JavaKnowledge/%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%A4%A7%E5%85%A8.md   "常用命令行大全"
 [86]: https://github.com/CharonChui/AndroidNote/blob/master/JavaKnowledge/%E5%8D%95%E4%BE%8B%E7%9A%84%E6%9C%80%E4%BD%B3%E5%AE%9E%E7%8E%B0%E6%96%B9%E5%BC%8F.md   "单例的最佳实现方式"
@@ -471,15 +527,15 @@ Android学习笔记
 [179]: https://github.com/CharonChui/AndroidNote/blob/master/BasicKnowledge/XmlPullParser.md   "XmlPullParser"
 
 
-[180]: https://github.com/CharonChui/AndroidNote/blob/master/KotlinCourse/Kotlin%E5%AD%A6%E4%B9%A0%E6%95%99%E7%A8%8B(%E4%B8%80).md "Kotlin学习教程(一)"
-[181]: https://github.com/CharonChui/AndroidNote/blob/master/KotlinCourse/Kotlin%E5%AD%A6%E4%B9%A0%E6%95%99%E7%A8%8B(%E4%BA%8C).md "Kotlin学习教程(二)"
-[182]: https://github.com/CharonChui/AndroidNote/blob/master/KotlinCourse/Kotlin%E5%AD%A6%E4%B9%A0%E6%95%99%E7%A8%8B(%E4%B8%89).md "Kotlin学习教程(三)"
-[183]: https://github.com/CharonChui/AndroidNote/blob/master/KotlinCourse/Kotlin%E5%AD%A6%E4%B9%A0%E6%95%99%E7%A8%8B(%E5%9B%9B).md "Kotlin学习教程(四)"
-[184]: https://github.com/CharonChui/AndroidNote/blob/master/KotlinCourse/Kotlin%E5%AD%A6%E4%B9%A0%E6%95%99%E7%A8%8B(%E4%BA%94).md "Kotlin学习教程(五)"
-[185]: https://github.com/CharonChui/AndroidNote/blob/master/KotlinCourse/Kotlin%E5%AD%A6%E4%B9%A0%E6%95%99%E7%A8%8B(%E5%85%AD).md "Kotlin学习教程(六)"
-[186]: https://github.com/CharonChui/AndroidNote/blob/master/KotlinCourse/Kotlin%E5%AD%A6%E4%B9%A0%E6%95%99%E7%A8%8B(%E4%B8%83).md "Kotlin学习教程(七)"
-[187]: https://github.com/CharonChui/AndroidNote/blob/master/KotlinCourse/Kotlin%E5%AD%A6%E4%B9%A0%E6%95%99%E7%A8%8B(%E5%85%AB).md "Kotlin学习教程(八)"
-[188]: https://github.com/CharonChui/AndroidNote/blob/master/KotlinCourse/Kotlin%E5%AD%A6%E4%B9%A0%E6%95%99%E7%A8%8B(%E4%B9%9D).md "Kotlin学习教程(九)"
+[180]: https://github.com/CharonChui/AndroidNote/blob/master/KotlinCourse/1.Kotlin_%E7%AE%80%E4%BB%8B%26%E5%8F%98%E9%87%8F%26%E7%B1%BB%26%E6%8E%A5%E5%8F%A3.md "1.Kotlin_简介&变量&类&接口"
+[181]: https://github.com/CharonChui/AndroidNote/blob/master/KotlinCourse/2.Kotlin_%E9%AB%98%E9%98%B6%E5%87%BD%E6%95%B0%26Lambda%26%E5%86%85%E8%81%94%E5%87%BD%E6%95%B0.md "2.Kotlin_高阶函数&Lambda&内联函数.md"
+[182]: https://github.com/CharonChui/AndroidNote/blob/master/KotlinCourse/3.Kotlin_%E6%95%B0%E5%AD%97%26%E5%AD%97%E7%AC%A6%E4%B8%B2%26%E6%95%B0%E7%BB%84%26%E9%9B%86%E5%90%88.md "3.Kotlin_数字&字符串&数组&集合"
+[183]: https://github.com/CharonChui/AndroidNote/blob/master/KotlinCourse/4.Kotlin_%E8%A1%A8%E8%BE%BE%E5%BC%8F%26%E5%85%B3%E9%94%AE%E5%AD%97.md "4.Kotlin_表达式&关键字"
+[184]: https://github.com/CharonChui/AndroidNote/blob/master/KotlinCourse/5.Kotlin_%E5%86%85%E9%83%A8%E7%B1%BB%26%E5%AF%86%E5%B0%81%E7%B1%BB%26%E6%9E%9A%E4%B8%BE%26%E5%A7%94%E6%89%98.md "5.Kotlin_内部类&密封类&枚举&委托"
+[185]: https://github.com/CharonChui/AndroidNote/blob/master/KotlinCourse/6.Kotlin_%E5%A4%9A%E7%BB%A7%E6%89%BF%E9%97%AE%E9%A2%98.md "6.Kotlin_多继承问题"
+[186]: https://github.com/CharonChui/AndroidNote/blob/master/KotlinCourse/7.Kotlin_%E6%B3%A8%E8%A7%A3%26%E5%8F%8D%E5%B0%84%26%E6%89%A9%E5%B1%95.md "7.Kotlin_注解&反射&扩展"
+[187]: https://github.com/CharonChui/AndroidNote/blob/master/KotlinCourse/8.Kotlin_%E5%8D%8F%E7%A8%8B.md "8.Kotlin_协程"
+[188]: https://github.com/CharonChui/AndroidNote/blob/master/KotlinCourse/9.Kotlin_androidktx.md "9.Kotlin_androidktx"
 [189]: https://github.com/CharonChui/AndroidNote/blob/master/JavaKnowledge/%E5%85%AB%E7%A7%8D%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95.md "八种排序算法"
 [190]: https://github.com/CharonChui/AndroidNote/blob/master/JavaKnowledge/%E7%BA%BF%E7%A8%8B%E6%B1%A0%E7%AE%80%E4%BB%8B.md "线程池简介"
 [191]: https://github.com/CharonChui/AndroidNote/blob/master/JavaKnowledge/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F.md "设计模式"
@@ -488,7 +544,7 @@ Android学习笔记
 [194]: https://github.com/CharonChui/AndroidNote/blob/master/AdavancedPart/ConstraintLaayout%E7%AE%80%E4%BB%8B.md "ConstraintLaayout简介"
 [195]: https://github.com/CharonChui/AndroidNote/blob/master/JavaKnowledge/Http%E4%B8%8EHttps%E7%9A%84%E5%8C%BA%E5%88%AB.md "Http与Https的区别"
 [196]: https://github.com/CharonChui/AndroidNote/blob/master/JavaKnowledge/Top-K%E9%97%AE%E9%A2%98.md "Top-K问题"
-[197]: https://github.com/CharonChui/AndroidNote/blob/master/KotlinCourse/Kotlin%E5%AD%A6%E4%B9%A0%E6%95%99%E7%A8%8B(%E5%8D%81).md "Kotlin学习教程(十)"
+[197]: https://github.com/CharonChui/AndroidNote/blob/master/KotlinCourse/10.Kotlin_%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F.md "10.Kotlin_设计模式"
 [198]: https://github.com/CharonChui/AndroidNote/blob/master/AppPublish/%E4%BD%BF%E7%94%A8Jenkins%E5%AE%9E%E7%8E%B0%E8%87%AA%E5%8A%A8%E5%8C%96%E6%89%93%E5%8C%85.md "使用Jenkins实现自动化打包"
 [199]: https://github.com/CharonChui/AndroidNote/tree/master/Dagger2 "Dagger2"
 [200]: https://github.com/CharonChui/AndroidNote/blob/master/Dagger2/1.Dagger2%E7%AE%80%E4%BB%8B(%E4%B8%80).md  "1.Dagger2简介(一).md"
@@ -556,6 +612,68 @@ Android学习笔记
 [260]:https://github.com/CharonChui/AndroidNote/blob/master/VideoDevelopment/%E8%A7%86%E9%A2%91%E7%BC%96%E7%A0%81/H265.md  "H265"
 [261]:  https://github.com/CharonChui/AndroidNote/blob/master/VideoDevelopment/P2P%E6%8A%80%E6%9C%AF/P2P.md "P2P"
 [262]: https://github.com/CharonChui/AndroidNote/blob/master/VideoDevelopment/P2P%E6%8A%80%E6%9C%AF/P2P%E5%8E%9F%E7%90%86_NAT%E7%A9%BF%E9%80%8F.md "P2P原理_NAT穿透"
+[263]: https://github.com/CharonChui/AndroidNote/tree/master/OperatingSystem "操作系统"
+[264]: https://github.com/CharonChui/AndroidNote/blob/master/OperatingSystem/1.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%AE%80%E4%BB%8B.md "1.操作系统简介"
+[265]: https://github.com/CharonChui/AndroidNote/blob/master/OperatingSystem/2.%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B.md "2.进程和线程"
+[266]: https://github.com/CharonChui/AndroidNote/blob/master/OperatingSystem/3.%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86.md "3.内存管理"
+[267]: https://github.com/CharonChui/AndroidNote/blob/master/OperatingSystem/4.%E8%B0%83%E5%BA%A6.md "4.调度"
+
+[268]: https://github.com/CharonChui/AndroidNote/blob/master/OperatingSystem/5.I:O.md "5.I/O"
+
+[269]: https://github.com/CharonChui/AndroidNote/blob/master/OperatingSystem/6.%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86.md "6.文件管理"
+[270]: https://github.com/CharonChui/AndroidNote/blob/master/OperatingSystem/7.%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%B3%BB%E7%BB%9F.md "7.嵌入式系统"
+[271]: https://github.com/CharonChui/AndroidNote/blob/master/OperatingSystem/8.%E8%99%9A%E6%8B%9F%E6%9C%BA.md "8.虚拟机"
+[272]: https://github.com/CharonChui/AndroidNote/tree/master/Architect "架构设计"
+[273]: https://github.com/CharonChui/AndroidNote/blob/master/Architect/1.%E6%9E%B6%E6%9E%84%E7%AE%80%E4%BB%8B.md "1.架构简介"
+[274]: https://github.com/CharonChui/AndroidNote/tree/master/OperatingSystem/AndroidKernal  "Android内核"
+[275]: https://github.com/CharonChui/AndroidNote/blob/master/OperatingSystem/AndroidKernal/1.Android%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1.md "1.Android进程间通信"
+[276]:  https://github.com/CharonChui/AndroidNote/blob/master/OperatingSystem/AndroidKernal/2.Android%E7%BA%BF%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1%E4%B9%8BHandler%E6%B6%88%E6%81%AF%E6%9C%BA%E5%88%B6.md "2.Android线程间通信之Handler消息机制"
+[277]: https://github.com/CharonChui/AndroidNote/blob/master/OperatingSystem/AndroidKernal/3.Android%20Framework%E6%A1%86%E6%9E%B6.md "3.Android Framework框架"
+[278]: https://github.com/CharonChui/AndroidNote/blob/master/OperatingSystem/AndroidKernal/4.ActivityManagerService%E7%AE%80%E4%BB%8B.md "4.ActivityManagerService简介"
+[279]: https://github.com/CharonChui/AndroidNote/blob/master/OperatingSystem/AndroidKernal/5.Android%E6%B6%88%E6%81%AF%E8%8E%B7%E5%8F%96.md "5.Android消息获取"
+[280]: https://github.com/CharonChui/AndroidNote/blob/master/OperatingSystem/AndroidKernal/6.%E5%B1%8F%E5%B9%95%E7%BB%98%E5%88%B6%E5%9F%BA%E7%A1%80.md "6.屏幕绘制基础"
+[281]: https://github.com/CharonChui/AndroidNote/blob/master/OperatingSystem/AndroidKernal/7.View%E7%BB%98%E5%88%B6%E5%8E%9F%E7%90%86.md "7.View绘制原理"
+[282]: https://github.com/CharonChui/AndroidNote/blob/master/OperatingSystem/AndroidKernal/8.WindowManagerService%E7%AE%80%E4%BB%8B.md "8.WindowManagerService简介"
+
+[283]: https://github.com/CharonChui/AndroidNote/blob/master/OperatingSystem/AndroidKernal/9.PackageManagerService%E7%AE%80%E4%BB%8B.md "9.PackageManagerService简介"
+
+[ 284 ]: https://github.com/CharonChui/AndroidNote/blob/master/SourceAnalysis/LeakCanary%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90.md. "LeakCanary源码分析"
+[285]: https://github.com/CharonChui/AndroidNote/blob/master/JavaKnowledge/Java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B.md "Java内存模型"
+[286]: https://github.com/CharonChui/AndroidNote/blob/master/JavaKnowledge/JVM%E6%9E%B6%E6%9E%84.md "JVM架构"
+[287]: https://github.com/CharonChui/AndroidNote/tree/master/Jetpack "Jetpack"
+[288]: https://github.com/CharonChui/AndroidNote/blob/master/Jetpack/Jetpack%E7%AE%80%E4%BB%8B.md  "Jetpack简介"
+[289]: https://github.com/CharonChui/AndroidNote/tree/master/Jetpack/architecture "architecture"
+[290]: https://github.com/CharonChui/AndroidNote/tree/master/Jetpack/ui  "ui"
+[291]: https://github.com/CharonChui/AndroidNote/tree/master/Jetpack/foundation  "foundation"
+[292]: https://github.com/CharonChui/AndroidNote/tree/master/Jetpack/behavior "behavior"
+[293]: https://github.com/CharonChui/AndroidNote/blob/master/Jetpack/architecture/1.%E7%AE%80%E4%BB%8B.md "1.简介"
+[294]: https://github.com/CharonChui/AndroidNote/blob/master/Jetpack/architecture/2.ViewBinding%E7%AE%80%E4%BB%8B.md "2.ViewBinding简介"
+[295]: https://github.com/CharonChui/AndroidNote/blob/master/Jetpack/architecture/3.Lifecycle%E7%AE%80%E4%BB%8B.md "3.Lifecycle简介"
+[296]: https://github.com/CharonChui/AndroidNote/blob/master/Jetpack/architecture/4.ViewModel%E7%AE%80%E4%BB%8B.md "4.ViewModel简介"
+[297]: https://github.com/CharonChui/AndroidNote/blob/master/Jetpack/architecture/5.LiveData%E7%AE%80%E4%BB%8B.md "5.LiveData简介"
+[298]: https://github.com/CharonChui/AndroidNote/blob/master/Jetpack/architecture/6.DataBinding%E7%AE%80%E4%BB%8B.md "6.DataBinding简介"
+[299]: https://github.com/CharonChui/AndroidNote/blob/master/Jetpack/architecture/7.Room%E7%AE%80%E4%BB%8B.md "7.Room简介"
+[300]: https://github.com/CharonChui/AndroidNote/blob/master/Jetpack/architecture/8.PagingLibrary%E7%AE%80%E4%BB%8B.md "8.PagingLibrary简介"
+[301]: https://github.com/CharonChui/AndroidNote/blob/master/Jetpack/architecture/9.App%20Startup%E7%AE%80%E4%BB%8B.md "9.App Startup简介"
+[302]: https://github.com/CharonChui/AndroidNote/blob/master/Jetpack/architecture/10.DataStore%E7%AE%80%E4%BB%8B.md "10.DataStore简介"
+[303]: https://github.com/CharonChui/AndroidNote/blob/master/Jetpack/architecture/11.Hilt%E7%AE%80%E4%BB%8B.md "11.Hilt简介"
+[304]: https://github.com/CharonChui/AndroidNote/blob/master/Jetpack/architecture/12.Navigation%E7%AE%80%E4%BB%8B.md "12.Navigation简介"
+[305]: https://github.com/CharonChui/AndroidNote/blob/master/Jetpack/architecture/13.Jetpack%20MVVM%E7%AE%80%E4%BB%8B.md "13.Jetpack MVVM简介"
+[306]: https://github.com/CharonChui/AndroidNote/blob/master/Jetpack/architecture/14.findViewById%E7%9A%84%E8%BF%87%E5%8E%BB%E5%8F%8A%E6%9C%AA%E6%9D%A5.md "14.findViewById的过去及未来"
+[307]: https://github.com/CharonChui/AndroidNote/blob/master/Jetpack/ui/Jetpack%20Compose%E7%AE%80%E4%BB%8B.md "Jetpack Compose简介"
+[308]: https://github.com/CharonChui/AndroidNote/tree/master/Jetpack/ui/material "material"
+[309]: https://github.com/CharonChui/AndroidNote/blob/master/Jetpack/ui/material/1.MaterialToolbar%E7%AE%80%E4%BB%8B.md "1.MaterialToolbar简介"
+[310]: https://github.com/CharonChui/AndroidNote/blob/master/Jetpack/ui/material/2.NavigationView%E7%AE%80%E4%BB%8B.md "2.NavigationView简介"
+[311]: https://github.com/CharonChui/AndroidNote/blob/master/Jetpack/ui/material/3.NestedScrollView%E7%AE%80%E4%BB%8B.md "3.NestedScrollView简介"
+[312]: https://github.com/CharonChui/AndroidNote/blob/master/Jetpack/ui/material/4.CoordinatorLayout%E7%AE%80%E4%BB%8B.md "4.CoordinatorLayout简介"
+[313]: https://github.com/CharonChui/AndroidNote/blob/master/Jetpack/ui/material/5.AppBarLayout%E7%AE%80%E4%BB%8B.md "5.AppBarLayout简介"
+[314]: https://github.com/CharonChui/AndroidNote/blob/master/Jetpack/ui/material/6.CollapsingToolbarLayout%E7%AE%80%E4%BB%8B.md "6.CollapsingToolbarLayout简介"
+[315]: https://github.com/CharonChui/AndroidNote/blob/master/Jetpack/ui/material/7.Snackbar%E7%AE%80%E4%BB%8B.md "7.Snackbar简介"
+[316]: https://github.com/CharonChui/AndroidNote/blob/master/Jetpack/ui/material/8.TabLayout%E7%AE%80%E4%BB%8B.md "8.TabLayout简介"
+[317]: https://github.com/CharonChui/AndroidNote/blob/master/Jetpack/foundation/1.%E7%AE%80%E4%BB%8B.md "1.简介"
+[318]: https://github.com/CharonChui/AndroidNote/blob/master/Jetpack/behavior/1.%E7%AE%80%E4%BB%8B.md "1.简介"
+[319]: https://github.com/CharonChui/AndroidNote/blob/master/Gradle%26Maven/Composing%20builds%E7%AE%80%E4%BB%8B.md  "Composing builds简介"
+[320]: https://github.com/CharonChui/AndroidNote/blob/master/ImageLoaderLibrary/Coil%E7%AE%80%E4%BB%8B.md "Coil简介"
 
 
 
